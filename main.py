@@ -1,5 +1,6 @@
 from threading import Thread
 import importlib
+import os
 
 expected_module = 'PRODCONSMODULE'
 default_module = 'pysyn'
@@ -25,10 +26,10 @@ if __main__ == "main":
     prod_cons_1 = GenProdCons()
     prod_cons_2 = GenProdCons()
     rendezvous  = RendezvousDEchange
-    Thread thr_prod_1 = Thread(target = producer, args=(prod_cons_1))
-    Thread thr_prod_2 = Thread(target = producer, args=(prod_cons_2))
-    Thread thr_cons_1 = Thread(target = consumer, args=(prod_cons_1, rendezvous, 5000))
-    Thread thr_cons_2 = Thread(target = consumer, args=(prod_cons_2, rendezvous, 3000))
+    thr_prod_1 = Thread(target = producer, args=(prod_cons_1))
+    thr_prod_2 = Thread(target = producer, args=(prod_cons_2))
+    thr_cons_1 = Thread(target = consumer, args=(prod_cons_1, rendezvous, 5000))
+    thr_cons_2 = Thread(target = consumer, args=(prod_cons_2, rendezvous, 3000))
     thr_prod_1.join()
     thr_prod_2.join()
     thr_cons_1.join()
